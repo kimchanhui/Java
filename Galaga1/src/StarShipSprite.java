@@ -1,0 +1,36 @@
+import java.awt.Image;
+
+public class StarShipSprite extends Sprite {
+	private GalagaGame game;
+
+	public StarShipSprite(GalagaGame game, Image image, int x, int y) {
+		super(image, x, y);
+		this.game = game;
+		dx = 0;
+		dy = 0;
+	}
+
+	@Override
+	public void move() {
+		if ((dy < 0) && (y < 10)) {
+			return;
+		}
+		if ((dy > 0) && (y > 970)) {
+			return;
+		}
+		if ((dx < 0) && (x < 10)) {
+			return;
+		}
+		if ((dx > 0) && (x > 1870)) {
+			return;
+		}
+		super.move();
+	}
+
+	@Override
+	public void handleCollision(Sprite other) {
+		if (other instanceof AlienSprite) {
+			game.endGame();
+		}
+	}
+}
